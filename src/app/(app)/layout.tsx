@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 import BottomNav from "@/components/BottomNav";
+import LogoutButton from "@/components/LogoutButton";
 
 export default async function AppLayout({
   children,
@@ -24,6 +25,12 @@ export default async function AppLayout({
   return (
     <>
       <div className="wrap">
+        <div className="app-head">
+          <div>
+            <div className="kicker" style={{ color: "var(--acc)" }}>Forja Fit</div>
+          </div>
+          <LogoutButton />
+        </div>
         <div className="scr">{children}</div>
       </div>
       <BottomNav />

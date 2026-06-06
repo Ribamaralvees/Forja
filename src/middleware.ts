@@ -33,7 +33,8 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const isAuthPage = path === "/login";
-  const isPublic = isAuthPage || path === "/";
+  const isAuthCallback = path.startsWith("/auth/callback");
+  const isPublic = isAuthPage || isAuthCallback || path === "/";
 
   if (!user && !isPublic) {
     return NextResponse.redirect(new URL("/login", request.url));
@@ -46,5 +47,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|api/.*\\.).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|icon-192.png|icon-512.png|apple-touch-icon.png|maskable-icon-512.png|icone.png|manifest.webmanifest|api/.*\\.).*)",
+  ],
 };
